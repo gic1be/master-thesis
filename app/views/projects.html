@@ -1,0 +1,22 @@
+
+<div class="row">
+  <div class="col-md-6">
+  <table class="table">
+    <tr>
+      <th>Picture</th>
+      <th>Index</th>
+      <th>Name</th>
+      <th>Type</th>
+    </tr>
+    <tr ng-click="selectProject(projects[$index])" ng-repeat="project in projects">
+      <td><img ng-src="http://enterprise-iot.org/wp-content/uploads/2014/12/Logo_grey_319px.png/{{project.row[0].name}}" alt="Missing Picture" /></td>
+      <td>{{$index}}</td>
+      <td>{{ project.row[0].name }}</td>
+      <td>{{ project.row[0].type }}</td>
+    </tr>
+  </table>
+</div>
+<div class="col-md-6">
+  {{projectName}}
+</div>
+</div>
