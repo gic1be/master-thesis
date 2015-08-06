@@ -1,22 +1,54 @@
+<div class="row">
+  <div class="col-md-6">
+    <pre>Here you have the possibility to search for projects by name and get detailed information about it. </pre>
+  </div>
+</div>
 
 <div class="row">
   <div class="col-md-6">
-  <table class="table">
-    <tr>
-      <th>Picture</th>
-      <th>Index</th>
-      <th>Name</th>
-      <th>Type</th>
-    </tr>
-    <tr ng-click="selectProject(projects[$index])" ng-repeat="project in projects">
-      <td><img ng-src="http://enterprise-iot.org/wp-content/uploads/2014/12/Logo_grey_319px.png/{{project.row[0].name}}" alt="Missing Picture" /></td>
-      <td>{{$index}}</td>
-      <td>{{ project.row[0].name }}</td>
-      <td>{{ project.row[0].type }}</td>
-    </tr>
-  </table>
-</div>
+     <!-- search field with a specific "searchText"  -->
+    <div class="container">
+      <label>Search: <input ng-model="searchText" placeholder="Project name or type"></label>
+    </br>
+  </br>
+  <!-- ng-click: get the information on the right side (second div with col-md-6)
+      ng-repeat: for every project get a new div.
+                 filter: show only things within the searchText by search label-->
+
+        <div class=row ng-click="selectProject(projects[$index])" ng-repeat="project in data.projects | filter:searchText">
+          <div class="eachProject">
+            <div class="container">
+              <div class="col-md-8" >
+              </br>
+              <table class="table" >
+                <tr>
+                  <th class="col-md-8">Name</th>
+                  <th>Type</th>
+                </tr>
+                <tr>
+                  <!-- project.row[0].name -->
+                  <td>{{ project.name }}</td>
+                  <td>{{ project.type }}</td>
+                </tr>
+              </table>
+              </div>
+
+
+          <p class="text-right">
+          </br>
+            <!-- <img width="200" ng-src="images\{{project.name}}.jpg" alt="" /></br></br> -->
+            <button class="btn btn-default" type="submit" ng-click="moreDetails(data.projects[$index])">Get more details</button>
+
+          </p>
+          </div>
+        </div>
+        </br>
+      </div>
+    </div>
+  </div>
+
 <div class="col-md-6">
-  {{projectName}}
+  <button class="btn btn-default" type="submit" ng-click="addProject()">Add a new project</button>
+  {{project.Name}}
 </div>
 </div>

@@ -15,9 +15,13 @@ angular
     'ngResource',
     'ngRoute',
     'ngSanitize',
-    'ngTouch'
+    'ngTouch',
+    'ui.bootstrap',
+    'ngTagsInput'
   ])
-  .config(function ($routeProvider) {
+  .config(function ($routeProvider, $httpProvider) {
+    $httpProvider.defaults.useXDomain = true;
+      delete $httpProvider.defaults.headers.common['X-Requested-With'];
     $routeProvider
       .when('/', {
         templateUrl: 'views/main.html',
@@ -33,6 +37,11 @@ angular
         templateUrl: 'views/projects.html',
         controller: 'ProjectsCtrl',
         controllerAs: 'projects'
+      })
+      .when('/extendedSearch', {
+        templateUrl: 'views/extendedSearch.html',
+        controller: 'extendedSearchCtrl',
+        controllerAs: 'extendedSearch'
       })
       .otherwise({
         redirectTo: '/'
