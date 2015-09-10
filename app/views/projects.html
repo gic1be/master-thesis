@@ -1,54 +1,56 @@
-<div class="row">
-  <div class="col-md-6">
-    <pre>Here you have the possibility to search for projects by name and get detailed information about it. </pre>
-  </div>
-</div>
-
-<div class="row">
-  <div class="col-md-6">
-     <!-- search field with a specific "searchText"  -->
-    <div class="container">
-      <label>Search: <input ng-model="searchText" placeholder="Project name or type"></label>
-    </br>
-  </br>
-  <!-- ng-click: get the information on the right side (second div with col-md-6)
-      ng-repeat: for every project get a new div.
-                 filter: show only things within the searchText by search label-->
-
-        <div class=row ng-click="selectProject(projects[$index])" ng-repeat="project in data.projects | filter:searchText">
-          <div class="eachProject">
-            <div class="container">
-              <div class="col-md-8" >
-              </br>
-              <table class="table" >
-                <tr>
-                  <th class="col-md-8">Name</th>
-                  <th>Type</th>
-                </tr>
-                <tr>
-                  <!-- project.row[0].name -->
-                  <td>{{ project.name }}</td>
-                  <td>{{ project.type }}</td>
-                </tr>
-              </table>
-              </div>
-
-
-          <p class="text-right">
-          </br>
-            <!-- <img width="200" ng-src="images\{{project.name}}.jpg" alt="" /></br></br> -->
-            <button class="btn btn-default" type="submit" ng-click="moreDetails(data.projects[$index])">Get more details</button>
-
-          </p>
-          </div>
-        </div>
-        </br>
+<!-- <divclass="container"> -->
+  <div class="container" >
+    <div class="panel panel-success">
+      <div class="panel-heading">
+        <span class="glyphicon glyphicon-info-sign"></span> How to search or add projects
+      </div>
+      <div class="panel-body">
+        Here you have the possibility to search for projects by name or type and get detailed information about it. </br>
+        Also you are able to add new IoT projects through the data base by clicking on the button!
       </div>
     </div>
   </div>
 
-<div class="col-md-6">
-  <button class="btn btn-default" type="submit" ng-click="addProject()">Add a new project</button>
-  {{project.Name}}
+<div class="container">
+  <p class="text-right">
+    <button class="btn btn-success" type="submit" ng-click="addProject();data.getProperties()">Add a new project!</button>
+    </br></br>
+  </p>
+
+  <div class="container">
+    <div class="col-md-6" >
+      <label>Search for a project name:</label> <input type="text" class="form-control" ng-model="searchText" placeholder="Enter a project name">
+      </br>
+    </div>
+    <div class="col-md-6" >
+      <label>Or choose a type:</label>
+      <select class="form-control" ng-model="types" ng-options="types for types in formats">
+        <option value='' disabled selected>- Types -</option>
+        <option>{{types}}</option>
+      </select>
+    </div>
 </div>
+</br>
+</div>
+
+<div class="col-md-2" ></div>
+<div class="col-md-8" >
+
+<table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Detailed Information</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-click="selectProject(projects[$index])" data-ng-repeat="project in data.projects | filter:searchText | filter:types">
+        <td>{{ project.name }}</td>
+        <td>{{ project.type }}</td>
+        <td><button class="btn btn-default" type="submit" ng-click="moreDetails(data.projects[$index])">Get more details</button></td>
+      </tr>
+    </tbody>
+  </table>
+
 </div>

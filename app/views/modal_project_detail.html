@@ -2,7 +2,6 @@
 {{project.name}}
 </div>
 <div class="modal-body">
-
   <tabset justified="true">
 
     <tab heading="General Information">
@@ -27,6 +26,10 @@
         <div class="panel-heading">Summary</div>
         <div class="panel-body">{{project.summary}}</div>
       </div>
+      <div class="panel panel-default" ng-if="project.weblink">
+        <div class="panel-heading">Web Link</div>
+        <div class="panel-body"><a href="{{project.weblink}}">Case Study {{project.name}}</a></div>
+      </div>
     </tab>
 
     <tab heading="Additional Properties">
@@ -36,7 +39,7 @@
         There are no additional properties yet.
       </div>
     <!-- Show all properties after summary. -->
-      <div class="form-group" ng-repeat="(name, status) in project" ng-if="$index >= 5 && name!=3">
+      <div class="form-group" ng-repeat="(name, status) in project" ng-if="$index >= 6">
         <div class="panel panel-default">
           <div class="panel-heading">{{name}}</div>
           <div class="panel-body">{{status}}</div>
@@ -44,34 +47,7 @@
       </div>
 
     </tab>
-    <tab heading="Third tab">
-    </tab>
   </tabset>
-
-
-<!-- empty result -->
-<!-- <div class=row ng-click="selectProject(projects[$index])" ng-repeat="project in projects | filter:searchText">
-  <div class="eachProject">
-    <div class="container">
-      <div class="col-md-8" >
-      </br>
-      <table class="table" >
-        <tr>
-          <th class="col-md-8">Name</th>
-          <th>Type</th>
-        </tr>
-        <tr>
-          <td>{{ project.row[0].name }}</td>
-          <td>{{ project.row[0].type }}</td>
-        </tr>
-      </table>
-      </div>
-</div>
-</div>
-</br>
-</div> -->
-
-<!-- <input type="text" class="form-control" ng-model="project.name"> -->
 </br>
 <button class="btn btn-default" ng-click="ok()">Ok</button>
 

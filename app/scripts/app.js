@@ -38,6 +38,11 @@ angular
         controller: 'ProjectsCtrl',
         controllerAs: 'projects'
       })
+      .when('/compareProjects', {
+        templateUrl: 'views/compareProjects.html',
+        controller: 'compareProjectsCtrl',
+        controllerAs: 'compareProjects'
+      })
       .when('/extendedSearch', {
         templateUrl: 'views/extendedSearch.html',
         controller: 'extendedSearchCtrl',

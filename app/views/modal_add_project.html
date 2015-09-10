@@ -11,13 +11,15 @@ Add a new project
       <label>Company:</label> <input type="text" ng-model="newProject.company" class="form-control" placeholder="Company"/><br />
       <label>Project Status:</label> <input type="text" ng-model="newProject.status" class="form-control" placeholder="Status"/><br />
       <label>Project Summary:</label> <input type="text" ng-model="newProject.summary" class="form-control" placeholder="Summary"/><br />
+      <label>Web Resource:</label> <input type="text" ng-model="newProject.weblink" class="form-control" placeholder="Web link"/><br />
       </br>
     </form>
     </tab>
 
-    <tab heading="Additional Properties">
+    <tab heading="Additional Properties" ng-click="data.getProperties()">
         <form class="form-horizontal" role="form">
       </br>
+
         <div class="form-group">
             <div class="col-sm-5"><label>Property Name</label></div>
             <div class="col-sm-5"><label>Property Value</label></div>
@@ -44,12 +46,26 @@ Add a new project
     </tab>
 
     <tab heading="Add tags">
+</br>
+    <div class="panel panel-success">
+      <div class="panel-heading">
+        <span class="glyphicon glyphicon-info-sign"></span> How to add tags
+        <!-- <button type="button" class="close" aria-label="Close" ng-model="test.name"><span aria-hidden="true">&times;</span></button> -->
+      </div>
+      <div class="panel-body">
+        You have two possibilities to add tags: </br>
+        <ol type="1">
+          <li> Add your own tags by typing them in the first field.
+          <li>Fill in some text about your project in the second field and klick "Tag it!". Your text will be structured in a semantic way.
+          Afterwards you have the possibility to choose tags of your choice witch fit with your project.</li>
+        </ol>
+      </div>
+    </div>
+
       <tags-input class="bootstrap" ng-model="tags" rows="3">
       </tags-input>
-      {{tags}}
     </br>
-      Fill in some text about your project and klick "Tag it!". Your text will be structured in a semantic way. </br>
-      Afterwards you have the possibility to choose tags of your choice witch fit with your project.</br>
+
       <div align="right">
         <textarea class="form-control" rows="5" placeholder="Type in some text" ng-model="tagText"></textarea>
       </br>

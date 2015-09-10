@@ -8,6 +8,11 @@
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/components-font-awesome/css/font-awesome.css" />
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="bower_components/alchemyjs/dist/alchemy.min.css" />
+    <link rel="stylesheet" href="bower_components/angular-chart.js/dist/angular-chart.css" />
+    <link rel="stylesheet" href="bower_components/jqcloud2/dist/jqcloud.css" />
     <link rel="stylesheet" href="bower_components/ng-tags-input/ng-tags-input.min.css" />
     <!-- endbower -->
     <!-- endbuild -->
@@ -24,6 +29,8 @@
     <!-- Add your site or application content here -->
     <div class="header">
       <div class="navbar navbar-default" role="navigation">
+        <a class="navbar-brand" href="#/"><img src="images/Logo_Ignite.png"></a>
+      </br>
         <div class="container">
           <div class="navbar-header">
 
@@ -33,16 +40,14 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-
-            <a class="navbar-brand" href="#/">Enterprise IoT</a>
           </div>
 
           <div class="collapse navbar-collapse" id="js-navbar-collapse">
 
             <ul class="nav navbar-nav">
-              <li><a ng-href="#/">Home</a></li>
-              <li><a ng-href="#/projects">Projects</a></<li>
+              <li><a ng-href="#/projects">Search projects</a></<li>
               <li><a ng-href="#/extendedSearch">Extended Search</a>
+              <li><a ng-href="#/compareProjects">Compare projects</a>
               <li><a ng-href="#/about">About</a></li>
             </ul>
           </div>
@@ -66,15 +71,22 @@
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
     <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/d3/d3.js"></script>
+    <script src="bower_components/lodash/dist/lodash.compat.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="bower_components/alchemyjs/dist/alchemy.min.js"></script>
     <script src="bower_components/angular/angular.js"></script>
-    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap.js"></script>
     <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="bower_components/Chart.js/Chart.js"></script>
+    <script src="bower_components/angular-chart.js/dist/angular-chart.js"></script>
     <script src="bower_components/angular-cookies/angular-cookies.js"></script>
     <script src="bower_components/angular-resource/angular-resource.js"></script>
     <script src="bower_components/angular-route/angular-route.js"></script>
     <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
     <script src="bower_components/angular-touch/angular-touch.js"></script>
-    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap.js"></script>
+    <script src="bower_components/jqcloud2/dist/jqcloud.js"></script>
     <script src="bower_components/ng-tags-input/ng-tags-input.min.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
@@ -85,8 +97,11 @@
         <script src="scripts/controllers/projects.js"></script>
         <script src="scripts/controllers/modal_project_detail.js"></script>
         <script src="scripts/controllers/modal_add_project.js"></script>
+        <script src="scripts/controllers/compareProjects.js"></script>
         <script src="scripts/controllers/extendedSearch.js"></script>
         <script src="scripts/controllers/about.js"></script>
+        <script src="scripts/controllers/getGraph.js"></script>
+
         <!-- endbuild -->
 
 </body>

@@ -14,7 +14,6 @@ console.log(input.project);
 
   $scope.ok = function () {
     $modalInstance.close($scope.project);
-    console.log ($scope.project);
   };
 
   $scope.cancel = function () {

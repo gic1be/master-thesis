@@ -1,0 +1,94 @@
+{
+  "nodes": [
+    {
+      "caption": "energy",
+      "type": "AddInformation",
+      "id": 1,
+      "cluster": 2
+    },
+    {
+      "caption": "electricity",
+      "type": "AddInformation",
+      "id": 2,
+      "cluster": 2
+    },
+    {
+      "caption": "LHCb Experiment at CERN",
+      "type": "Project",
+      "id": 3,
+      "cluster": 3
+    },
+    {
+      "caption": "radiation",
+      "type": "AddInformation",
+      "id": 4,
+      "cluster": 2
+    },
+    {
+      "caption": "energy",
+      "type": "AddInformation",
+      "id": 5,
+      "cluster": 2
+    },
+    {
+      "caption": "simulation",
+      "type": "AddInformation",
+      "id": 6,
+      "cluster": 2
+    },
+    {
+      "caption": "Smart Energy in the Chemical Industry",
+      "type": "Project",
+      "id": 7,
+      "cluster": 3
+    },
+    {
+      "caption": "UK Smart Metering Implementation Programme (SMIP)",
+      "type": "Project",
+      "id": 8,
+      "cluster": 3
+    }
+  ],
+  "edges": [
+    {
+      "source": 1,
+      "target": 3,
+      "caption": "belongs_to"
+    },
+    {
+      "source": 2,
+      "target": 3,
+      "caption": "belongs_to"
+    },
+    {
+      "source": 4,
+      "target": 3,
+      "caption": "belongs_to"
+    },
+    {
+      "source": 5,
+      "target": 3,
+      "caption": "belongs_to"
+    },
+    {
+      "source": 6,
+      "target": 3,
+      "caption": "belongs_to"
+    },
+    {
+      "source": 5,
+      "target": 7,
+      "caption": "belongs_to"
+    },
+    {
+      "source": 6,
+      "target": 7,
+      "caption": "belongs_to"
+    },
+    {
+      "source": 6,
+      "target": 8,
+      "caption": "belongs_to"
+    }
+  ]
+}

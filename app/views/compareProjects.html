@@ -1,0 +1,122 @@
+<div class="container">
+<div class="panel panel-success">
+  <div class="panel-heading">
+    <span class="glyphicon glyphicon-info-sign"></span> How to compare projects
+  </div>
+  <div class="panel-body">
+    Here you have the possiblity to compare projects. </br>
+    Please choose on each side one project to compare both.  </div>
+</div>
+</div>
+
+<!-- Main Content -->
+  <table class="table" >
+    <tr>
+    <th colspan="2">
+        <select class="form-control" id="sel1" ng-model="select1.name" >
+          <option value='' disabled selected>- First project -</option>
+          <option ng-repeat="project in data.projects" ng-click="selectProject(projects[$index])" >{{ project.name}}</option>
+        </select></th>
+    <th colspan="2"> <select class="form-control" id="sel2" ng-model="select2.name">
+          <option value='' disabled selected>- Second project -</option>
+          <option ng-repeat="project in data.projects" ng-click="selectProject(projects[$index])">{{ project.name }}</option>
+        </select></th>
+    </tr>
+  </table>
+
+<div class="panel panel-default" ng-if="select1 && select2 ">
+<table class="table">
+  <tr>
+    <td ng-if="data.projects.name = select1" ng-repeat="project in data.projects | filter:select1" class="col-md-6">
+      <table class="table" >
+      <tr>
+        <td>Project Name</td>
+        <td>{{project.name}}</td>
+      </tr>
+      <tr>
+        <td>Project Company</td>
+        <td ng-if="project.company = 'undefined'">-</td>
+        <td ng-if="project.company != 'undefined'">{{project.company}}</td>
+
+      </tr>
+      <tr>
+        <td>Type</td>
+        <td>{{project.type}}</td>
+      </tr>
+      <tr>
+        <td>Project Status</td>
+        <td ng-if="project.status = 'undefined'">-</td>
+        <td ng-if="project.status != 'undefined'">{{project.status}}</td>
+      </tr>
+      <tr>
+        <td>Project Summary</td>
+        <td ng-if="project.summary = 'undefined'">-</td>
+        <td ng-if="project.summary != 'undefined'">{{project.summary}}</td>
+      </tr>
+      <tr>
+        <td>Project Weblink</td>
+        <td ng-if="!project.weblink">-</td>
+        <td ng-if="project.weblink != 'undefined'"><a href="http://{{project.weblink}}">{{project.weblink}}</a></td>
+      </tr>
+      <tr>
+        <td ng-if="!project.Environment">
+          <span class="glyphicon glyphicon-info-sign"></span> There are no additional properties to compare.
+        </td>
+      </tr>
+      <tr ng-repeat="(name, status) in project" ng-if="project.Environment && $index >= 5">
+        <td>{{name}}</td>
+        <td>{{status}}</td>
+
+        </tr>
+      </table>
+    </td>
+
+
+    <td>
+    <td ng-if="data.projects.name = select2" ng-repeat="project in data.projects | filter:select2" class="col-md-6">
+      <table class="table" >
+      <tr>
+        <td>Project Name</td>
+        <td>{{project.name}}</td>
+      </tr>
+      <tr>
+        <td>Project Company</td>
+        <td ng-if="project.company = 'undefined'">-</td>
+        <td ng-if="project.company != 'undefined'">{{project.company}}</td>
+
+      </tr>
+      <tr>
+        <td>Type</td>
+        <td>{{project.type}}</td>
+      </tr>
+      <tr>
+        <td>Project Status</td>
+        <td ng-if="project.status = 'undefined'">-</td>
+        <td ng-if="project.status != 'undefined'">{{project.status}}</td>
+      </tr>
+      <tr>
+        <td>Project Summary</td>
+        <td ng-if="project.summary = 'undefined'">-</td>
+        <td ng-if="project.summary != 'undefined'">{{project.summary}}</td>
+      </tr>
+      <tr>
+        <td>Project Weblink</td>
+        <td ng-if="!project.weblink">-</td>
+        <td ng-if="project.weblink != 'undefined'"><a href="http://{{project.weblink}}">{{project.weblink}}</a></td>
+      </tr>
+      <tr>
+        <td ng-if="!project.Environment">
+          <span class="glyphicon glyphicon-info-sign"></span> There are no additional properties to compare.
+        </td>
+      </tr>
+      <tr ng-repeat="(name, status) in project" ng-if="project.Environment && $index >= 5">
+        <td>{{name}}</td>
+        <td>{{status}}</td>
+
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+
+</div>

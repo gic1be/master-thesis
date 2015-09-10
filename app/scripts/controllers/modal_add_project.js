@@ -63,20 +63,21 @@ angular.module('masterThesisApp').controller('ModalAddProjectCtrl', function ($s
     { "name": "Technical skills & experience", "value": "" }
   ];
 
+
   $scope.newProject = {};
   $scope.tags = [];
 
 // add another property
   $scope.addAdditionalProperty = function(index) {
     $scope.data.additionalProperties.push({});
-  }
+  };
 
 // delete a property next through the button
   $scope.deleteAdditionalProperty = function(index) {
     $scope.data.additionalProperties.splice(index, 1);
-  }
+  };
 
-// extractTags for using Open Calias (later)
+// extractTags for using Open Calias
 
   $scope.data.tagText = input.tagText;
 
@@ -89,8 +90,7 @@ angular.module('masterThesisApp').controller('ModalAddProjectCtrl', function ($s
       if(data) {
         for (var key in data) {
           if (data.hasOwnProperty(key)) {
-            //if(key.enthält(["socialTag", "cat"]))
-
+            //if(key contains(["socialTag", "cat"]))
             var tag = data[key].name;
             if(tag != undefined && $.inArray(tag, $scope.tags) == -1){
               $scope.tags.push({"text": tag});
@@ -112,11 +112,71 @@ angular.module('masterThesisApp').controller('ModalAddProjectCtrl', function ($s
 // project name and type have to be defined to add a new project
   $scope.isValid = function(){
     return $scope.newProject.name != undefined && $scope.newProject.type != undefined;
-  }
+  };
+
+
+  $scope.data.getProperties = function(){
+  var statement = "MATCH (val: Value_Dim)-[r]-(part:Part_of_Dim)-[p]-(dim:Dimension)RETURN dim, part, val";
+    $http.post('http://localhost:7474/db/data/transaction/commit', {
+      "statements" : [ {
+        "statement" : statement
+      } ]
+    }).
+    success(function(data, status, headers, config) {
+
+
+// get all dimensions
+      var result = {};
+      var rawData =  data.results[0].data;
+      $scope.data.element = [];
+
+      $scope.dimensionS = [];
+
+      for(var i = 0; i < rawData.length; i++) {
+
+        var values = [];
+        var v;
+
+        for(v in rawData[i].row[2]) {
+          if(v != "name" && v != "$$hashKey")
+
+          var dimensionname = rawData[i].row[2][v];
+            values.push(dimensionname);
+        }
+
+}
+      $scope.data.properties = [];
+      $scope.data.propertyPreDimension = [];
+      $scope.data.propertyDimension = [];
+
+
+     for(var j = 0; j < data.results[0].data.length; j++){
+        if (data.results[0].data[j].row[2] !== $scope.data.propertyPreDimension){
+          $scope.data.propertyPreDimension.push(data.results[0].data[j].row[2]);
+        } else {
+
+        }
+
+        if ($.inArray(data.results[0].data[j].row[1].name, $scope.data.test) == -1){
+          $scope.data.test.push(data.results[0].data[j].row[1].name);
+        } else {
+
+        }
+
+           for(var i = 0; i < data.results[0].data.length; i++){
+              $scope.data.properties.push(data.results[0].data[i].row[4]);
+            }
+
+
+    }
+      $scope.data.propertyDimension.push(data.results[0].data[0].row[0]);
+
+
+    });
+  };
 
 
 // add new Project
-
   $scope.addProject = function(){
     // add a Project
     var statement = {
@@ -124,17 +184,14 @@ angular.module('masterThesisApp').controller('ModalAddProjectCtrl', function ($s
        "statement" : checkQuery($scope.newProject.name),
       } ]
     };
-//    console.log(statement);
 
     $http.post('http://localhost:7474/db/data/transaction/commit', statement).
     success(function(data, status, headers, config) {
       // for projects which doesn't exist already
-  //    console.log(data);
-  //    console.log(data.results[0].data);
       if (data.results[0].data.length == 0) {
         var statement = {
           "statements" : [ {
-            "statement" : buildAddQuery($scope.newProject.name, $scope.newProject.type, $scope.newProject.company, $scope.newProject.status, $scope.newProject.summary, $scope.data.additionalProperties)
+            "statement" : buildAddQuery($scope.newProject.name, $scope.newProject.type, $scope.newProject.company, $scope.newProject.status, $scope.newProject.summary, $scope.newProject.weblink, $scope.data.additionalProperties)
           } ]
         };
         console.log(statement);
@@ -144,45 +201,43 @@ angular.module('masterThesisApp').controller('ModalAddProjectCtrl', function ($s
           var statement = {
             "statements" : addTagsStatements($scope.tags, $scope.newProject.name)
           };
-  //        console.log(statement);
-          $http.post('http://localhost:7474/db/data/transaction/commit', statement).
-          success(function(data, status, headers, config) {
-          });
-
         });
       } else{
 
     }
-//     console.log(data);
+    // console.log(data);
     });
 
     $modalInstance.close($scope.newProject);
-  }
+  };
 });
 
 
 // check whether a project already exists with this name or not (also possible with MERGE, but there is no possibility of checking upper and lower case)
 function checkQuery(projectName) {
   var query ="MATCH (p:Project) WHERE p.name=~'(?i)"+projectName+"' RETURN p";
-  console.log(query);
+  // console.log(query);
   return query;
 }
 
-function buildAddQuery(projectName, projectType, projectCompany, projectStatus, projectSummary, additionalProperties) {
+function buildAddQuery(projectName, projectType, projectCompany, projectStatus, projectSummary, projectWeblink, additionalProperties) {
   var query = "MERGE (proj:Project";
 
   if(projectName != "" || type != ""){
     query += "{";
     query += "name:"+'"'+projectName+'"})'+" ON CREATE SET proj.name="+ '"'+projectName+'"';
-    query += ", proj.type ='" + projectType + "'"
+    query += ", proj.type ='" + projectType + "'";
     if(projectCompany != ""){
-      query += ", proj.company ='" + projectCompany + "'"
+      query += ", proj.company ='" + projectCompany + "'";
     }
     if(projectStatus != ""){
-      query += ", proj.status ='" + projectStatus + "'"
+      query += ", proj.status ='" + projectStatus + "'";
     }
     if(projectSummary != ""){
-      query += ", proj.summary ='" + projectSummary + "'"
+      query += ", proj.summary ='" + projectSummary + "'";
+    }
+    if(projectWeblink != ""){
+      query += ", proj.weblink ='" + projectWeblink + "'";
     }
 
   // Will be needed if projects also will be able to update
@@ -202,7 +257,7 @@ function buildAddQuery(projectName, projectType, projectCompany, projectStatus, 
   }
 
   query += " RETURN proj";
-  console.log(query);
+  // console.log(query);
   return query;
 }
 
@@ -210,8 +265,8 @@ function buildAddQuery(projectName, projectType, projectCompany, projectStatus, 
 function addTagsStatements (tags,projectName) {
   var result = [];
 
-  console.log(tags);
-  console.log(projectName);
+  // console.log(tags);
+  // console.log(projectName);
   for(var i = 0; i < tags.length; i++){
     console.log(tags[i]);
     result.push({
@@ -220,12 +275,12 @@ function addTagsStatements (tags,projectName) {
   }
 
   for(var i = 0; i < tags.length; i++){
-    console.log(tags[i]);
+    // console.log(tags[i]);
     result.push({
       "statement" : "MATCH (add:AddInformation { name: '" + tags[i].text + "'}),(proj:Project {name: '" + projectName + "'}) MERGE (add)-[r:belongs_to]-> (proj)"
     });
   }
-  console.log(result);
+  // console.log(result);
 
   return result;
 }

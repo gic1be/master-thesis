@@ -143,3 +143,89 @@ background-color: #ffff00;
 color: #262626;
 background-color: #ffff00;
 }
+
+// information panel
+.panel-grey > .panel-footer {
+    color: #777;
+    background-color: #f8f8f8;
+    border-color: #e7e7e7;
+}
+.panel-heading > .table, .panel-heading > .table th {
+    margin:0px;
+    border: 0px;
+}
+
+// x-click on panel
+// .panel-heading span
+// {
+//     margin-top: -26px;
+//     // font-size: 15px;
+//     margin-right: -12px;
+// }
+//
+// .clickable {
+//     background: rgba(0, 0, 0, 0.15);
+//     display: inline-block;
+//     padding: 6px 12px;
+//     border-radius: 4px;
+//     cursor: pointer;
+// }
+
+
+// Graph visualisation
+
+    circle {
+        fill: white;
+        fill-opacity: .5;
+        stroke-width: 3;
+        stroke-opacity: 1;
+        stroke: blue;
+    }
+
+    circle.root {
+        stroke-width: 5;
+        fill: lightgrey;
+        fill-opacity: 1;
+    }
+
+    // circle.award {
+    //     stroke: yellow;
+    //     stroke-width: 1;
+    // }
+    //
+    // circle.Project {
+    //     stroke: lightgrey;
+    //     stroke-width: 1;
+    // }
+    // .selected circle{
+    //     fill-opacity: 1;
+    //     stroke-width: 4;
+    //     stroke: lightgrey;
+    // }
+    //
+    .edge {
+        stroke-linecap: round;
+        stroke: lightgrey;
+        stroke-opacity: 0.4;
+        stroke-width: 2;
+    }
+
+    .edge.belongs_to {
+        stroke: lightgrey;
+    }
+    //
+    // .edge.RECEIVED {
+    //     stroke-dasharray: 10,5,2,2,2,5;
+    //     stroke: yellow;
+    //     stroke-opacity: 1;
+    // }
+    //
+    // .edge.ACTED_IN {
+    //     stroke: green;
+    // }
+    //
+    // .edge.selected {
+    //     stroke: lightgrey;
+    //     stroke-opacity: 1;
+    //     stroke-dasharray: none;
+    // }

@@ -1,11 +1,59 @@
+<!-- <divclass="container"> -->
+
+    <div class="container">
+    <div class="panel panel-success">
+      <div class="panel-heading">
+        <span class="glyphicon glyphicon-info-sign"></span> How to use the extended search
+      </div>
+      <div class="panel-body">
+        Here you have the possibility to get recommendations by searching tags. The result will be a list of projects. </br>
+        So just type in some tags of your own choice to see what kind of projects this tags have.    </div>
+    </div>
+  </div>
+
+<div class="container">
+  <p>
+    <label>Tags:</label>
+    <tags-input class="bootstrap" ng-model="tags" rows="3" placeholder="Enter one ore more tags">
+    </tags-input>  </p>
+    <p class="text-right">
+      <button class="btn btn-success" type="submit" ng-click="search(tags)">Search</button>
+    </br>
+    </p>
+</div>
+
+<div class="container">
+  <div>
+    <div class=row ng-click="selectProject(projects[$index])" ng-repeat="project in data.projects">
+      <div class="eachProject">
+        <div class="container">
+          <div class="col-md-7" >
+          </br>
+          <table class="table" >
+            <tr>
+              <th class="col-md-7">Name</th>
+              <th>Type</th>
+            </tr>
+            <tr>
+              <td>{{ project.name }}</td>
+              <td>{{ project.type }}</td>
+            </tr>
+          </table>
+          </div>
 
 
-<div ng-controller="extendedSearchCtrl">
-  <form>
-    <label>Name:
-      <input type="text"
-             ng-model="searchName" />
-    </label>
-    <button class = "btn btn-default" ng-click="search()">Search</button>
-  </form>
+        <p class="text-right">
+        </br>
+          <button class="btn btn-default" type="submit" ng-click="moreDetails(data.projects[$index])">Get more details</button>
+        </br></br></br></br>
+          <button class="btn btn-default" type="submit" ng-click="getGraph(data.projects[$index])">Get detailed data structure</button>
+
+
+        </p>
+        </div>
+      </div></br>
+    </div>
+  </div>
+  <div class="col-md-6" >
+</div>
 </div>
